@@ -527,6 +527,7 @@
           <a href="#joki">Joki</a>
           <a href="#gendong">Gendong</a>
           <a href="#montage">Montage</a>
+          <a href="#ulasan">Ulasan</a>
           <a href="#order">Order</a>
         </div>
       </nav>
@@ -685,6 +686,40 @@
       </div>
     </section>
 
+
+    <section class="container reveal" id="ulasan">
+      <div class="section-head">
+        <div class="eyebrow">Customer Review</div>
+        <h2>Rating & Ulasan</h2>
+        <p>Kasih rating dan ceritakan pengalaman kamu di RizzzStore.id ⭐</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title"><h3>Beri Ulasan</h3><span class="flag">⭐ REVIEW</span></div>
+          <form id="reviewForm">
+            <input id="reviewName" required maxlength="30" placeholder="Nama / Nickname"
+              style="width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:white;outline:none;margin-bottom:10px;">
+            <div id="starPicker" style="display:flex;gap:5px;font-size:1.7rem;margin-bottom:10px;">
+              <button type="button" data-star="1" style="background:none;border:0;color:#466074;cursor:pointer;">★</button>
+              <button type="button" data-star="2" style="background:none;border:0;color:#466074;cursor:pointer;">★</button>
+              <button type="button" data-star="3" style="background:none;border:0;color:#466074;cursor:pointer;">★</button>
+              <button type="button" data-star="4" style="background:none;border:0;color:#466074;cursor:pointer;">★</button>
+              <button type="button" data-star="5" style="background:none;border:0;color:#466074;cursor:pointer;">★</button>
+            </div>
+            <textarea id="reviewText" required maxlength="180" placeholder="Tulis ulasan kamu..."
+              style="width:100%;min-height:105px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:white;outline:none;resize:vertical;margin-bottom:12px;"></textarea>
+            <button class="btn primary" type="submit">KIRIM ULASAN</button>
+          </form>
+        </div>
+        <div class="card">
+          <div class="card-title"><h3>Ulasan Terbaru</h3><span class="flag" id="averageRating">⭐ 0.0</span></div>
+          <div id="reviewList" class="price-list">
+            <div class="price-row"><span style="color:var(--muted);">Belum ada ulasan. Jadilah yang pertama!</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="container reveal" id="order">
       <div class="order">
         <div class="eyebrow">RizzzStore.id</div>
@@ -722,6 +757,62 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    const reviewForm = document.getElementById("reviewForm");
+    const reviewList = document.getElementById("reviewList");
+    const averageRating = document.getElementById("averageRating");
+    const starButtons = document.querySelectorAll("#starPicker button");
+    let selectedRating = 0;
+
+    function getReviews() {
+      try { return JSON.parse(localStorage.getItem("rizzzstore_reviews") || "[]"); }
+      catch { return []; }
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+    }
+    function renderReviews() {
+      const reviews = getReviews();
+      reviewList.innerHTML = "";
+      if (!reviews.length) {
+        reviewList.innerHTML = '<div class="price-row"><span style="color:var(--muted);">Belum ada ulasan. Jadilah yang pertama!</span></div>';
+        averageRating.textContent = "⭐ 0.0";
+        return;
+      }
+      const avg = reviews.reduce((a, r) => a + r.rating, 0) / reviews.length;
+      averageRating.textContent = "⭐ " + avg.toFixed(1);
+      reviews.slice().reverse().slice(0, 5).forEach(r => {
+        const row = document.createElement("div");
+        row.className = "price-row";
+        row.style.display = "block";
+        row.innerHTML = '<strong>' + escapeHtml(r.name) + '</strong> <span style="color:#5dd3ff;">' +
+          "★".repeat(r.rating) + "☆".repeat(5-r.rating) + '</span><div style="color:var(--muted);font-size:.9rem;margin-top:5px;">' +
+          escapeHtml(r.text) + '</div>';
+        reviewList.appendChild(row);
+      });
+    }
+    starButtons.forEach(btn => btn.addEventListener("click", () => {
+      selectedRating = Number(btn.dataset.star);
+      starButtons.forEach(b => b.style.color = Number(b.dataset.star) <= selectedRating ? "#5dd3ff" : "#466074");
+    }));
+    reviewForm.addEventListener("submit", e => {
+      e.preventDefault();
+      if (!selectedRating) return alert("Silakan pilih rating bintang terlebih dahulu ⭐");
+      const reviews = getReviews();
+      reviews.push({
+        name: document.getElementById("reviewName").value.trim(),
+        rating: selectedRating,
+        text: document.getElementById("reviewText").value.trim()
+      });
+      localStorage.setItem("rizzzstore_reviews", JSON.stringify(reviews));
+      reviewForm.reset();
+      selectedRating = 0;
+      starButtons.forEach(b => b.style.color = "#466074");
+      renderReviews();
+      alert("Terima kasih sudah memberikan ulasan! ⭐");
+    });
+    renderReviews();
+
   </script>
 </body>
 </html>
