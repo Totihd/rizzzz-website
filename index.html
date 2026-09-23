@@ -294,7 +294,7 @@
 
     // Supabase Online Rating
     const SUPABASE_URL = "https://rxjtlfqhannwlcxbalny.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_PizOBYcrKA5DilDZw_JE";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_PizOBYcrKA5DilDZw_JEcg_VtgKN6wN";
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
     const reviewForm = document.getElementById("reviewForm");
@@ -341,13 +341,8 @@
         .limit(30);
 
       if (error) {
-        reviewList.innerHTML =
-          '<div class="review-empty">' +
-          '<strong style="color:#ffb4b4;">Ulasan gagal dimuat.</strong><br>' +
-          '<span style="font-size:.82rem;">Supabase: ' +
-          escapeHtml(error.message || "Unknown error") +
-          '</span></div>';
-        console.error("Supabase loadReviews error:", error);
+        reviewList.innerHTML = '<div class="review-empty">Ulasan belum dapat dimuat. Pastikan database Supabase sudah disetup.</div>';
+        console.error(error);
         return;
       }
       renderReviews(data || []);
@@ -383,8 +378,8 @@
       reviewForm.classList.remove("review-loading");
 
       if (error) {
-        reviewStatus.textContent = "Gagal: " + (error.message || "Supabase error");
-        console.error("Supabase insert review error:", error);
+        reviewStatus.textContent = "Gagal mengirim. Coba lagi.";
+        console.error(error);
         return;
       }
 
@@ -394,13 +389,6 @@
       reviewStatus.textContent = "Ulasan berhasil dikirim! ⭐";
       await loadReviews();
     });
-
-    supabaseClient
-      .channel("reviews-live")
-      .on("postgres_changes", { event: "*", schema: "public", table: "reviews" }, () => {
-        loadReviews();
-      })
-      .subscribe();
 
     loadReviews();
   </script>
