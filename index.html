@@ -720,11 +720,6 @@
       </div>
     </section>
 
-
-      <div class="note" style="margin-top:16px;">
-        <strong>ONLINE REVIEW:</strong> Ulasan disimpan di database dan dapat dilihat pengunjung lain setelah Supabase dikonfigurasi.
-      </div>
-
     <section class="container reveal" id="order">
       <div class="order">
         <div class="eyebrow">RizzzStore.id</div>
@@ -748,7 +743,6 @@
     © <span id="year"></span> RIZZZSTORE.ID — Mobile Legend Service.
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -764,113 +758,57 @@
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-    // ===== RIZZZSTORE ONLINE REVIEW SYSTEM =====
-    // Isi SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY setelah membuat project Supabase.
-    const SUPABASE_URL = "https://rxjtlfqhannwlcxbalny.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_PizOBYcrKA5DilDZw_JEcg_VtgKN6wN";
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-
     const reviewForm = document.getElementById("reviewForm");
     const reviewList = document.getElementById("reviewList");
     const averageRating = document.getElementById("averageRating");
     const starButtons = document.querySelectorAll("#starPicker button");
     let selectedRating = 0;
 
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[c]));
+    function getReviews() {
+      try { return JSON.parse(localStorage.getItem("rizzzstore_reviews") || "[]"); }
+      catch { return []; }
     }
-
-    async function renderReviews() {
-      const { data, error } = await supabaseClient
-        .from("reviews")
-        .select("name,rating,text,created_at")
-        .order("created_at", { ascending: false })
-        .limit(20);
-
-      if (error) {
-        console.error("Review load error:", error);
-        reviewList.innerHTML =
-          '<div class="price-row"><span style="color:var(--muted);">Ulasan online belum terhubung. Cek konfigurasi Supabase.</span></div>';
-        averageRating.textContent = "⭐ -";
-        return;
-      }
-
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+    }
+    function renderReviews() {
+      const reviews = getReviews();
       reviewList.innerHTML = "";
-
-      if (!data.length) {
-        reviewList.innerHTML =
-          '<div class="price-row"><span style="color:var(--muted);">Belum ada ulasan. Jadilah yang pertama!</span></div>';
+      if (!reviews.length) {
+        reviewList.innerHTML = '<div class="price-row"><span style="color:var(--muted);">Belum ada ulasan. Jadilah yang pertama!</span></div>';
         averageRating.textContent = "⭐ 0.0";
         return;
       }
-
-      const avg = data.reduce((sum, r) => sum + Number(r.rating), 0) / data.length;
+      const avg = reviews.reduce((a, r) => a + r.rating, 0) / reviews.length;
       averageRating.textContent = "⭐ " + avg.toFixed(1);
-
-      data.forEach(r => {
+      reviews.slice().reverse().slice(0, 5).forEach(r => {
         const row = document.createElement("div");
         row.className = "price-row";
         row.style.display = "block";
-        row.innerHTML =
-          '<strong>' + escapeHtml(r.name) + '</strong> ' +
-          '<span style="color:#5dd3ff;">' +
-          "★".repeat(Number(r.rating)) + "☆".repeat(5 - Number(r.rating)) +
-          '</span>' +
-          '<div style="color:var(--muted);font-size:.9rem;margin-top:5px;">' +
+        row.innerHTML = '<strong>' + escapeHtml(r.name) + '</strong> <span style="color:#5dd3ff;">' +
+          "★".repeat(r.rating) + "☆".repeat(5-r.rating) + '</span><div style="color:var(--muted);font-size:.9rem;margin-top:5px;">' +
           escapeHtml(r.text) + '</div>';
         reviewList.appendChild(row);
       });
     }
-
     starButtons.forEach(btn => btn.addEventListener("click", () => {
       selectedRating = Number(btn.dataset.star);
-      starButtons.forEach(b => {
-        b.style.color = Number(b.dataset.star) <= selectedRating ? "#5dd3ff" : "#466074";
-      });
+      starButtons.forEach(b => b.style.color = Number(b.dataset.star) <= selectedRating ? "#5dd3ff" : "#466074");
     }));
-
-    reviewForm.addEventListener("submit", async (e) => {
+    reviewForm.addEventListener("submit", e => {
       e.preventDefault();
-
-      if (!selectedRating) {
-        alert("Silakan pilih rating bintang terlebih dahulu ⭐");
-        return;
-      }
-
-      const name = document.getElementById("reviewName").value.trim();
-      const text = document.getElementById("reviewText").value.trim();
-
-      const { error } = await supabaseClient.from("reviews").insert({
-        name,
+      if (!selectedRating) return alert("Silakan pilih rating bintang terlebih dahulu ⭐");
+      const reviews = getReviews();
+      reviews.push({
+        name: document.getElementById("reviewName").value.trim(),
         rating: selectedRating,
-        text
+        text: document.getElementById("reviewText").value.trim()
       });
-
-      if (error) {
-        console.error("Review insert error:", error);
-        alert("Ulasan gagal dikirim. Pastikan Supabase sudah dikonfigurasi.");
-        return;
-      }
-
+      localStorage.setItem("rizzzstore_reviews", JSON.stringify(reviews));
       reviewForm.reset();
       selectedRating = 0;
       starButtons.forEach(b => b.style.color = "#466074");
-      await renderReviews();
-      alert("Terima kasih sudah memberikan ulasan! ⭐");
-    });
-
-    renderReviews();
-
-    // Update otomatis saat ada ulasan baru dari pengunjung lain.
-    supabaseClient
-      .channel("reviews-live")
-      .on("postgres_changes",
-        { event: "INSERT", schema: "public", table: "reviews" },
-        () => renderReviews()
-      )
-      .subscribe();
+      renderReviews();
       alert("Terima kasih sudah memberikan ulasan! ⭐");
     });
     renderReviews();
