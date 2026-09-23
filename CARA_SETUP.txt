@@ -1,0 +1,22 @@
+RIZZZSTORE.ID — ONLINE REVIEW SETUP
+
+1. Buat project Supabase.
+2. Buka SQL Editor.
+3. Jalankan semua isi file: supabase_reviews.sql
+4. Ambil Project URL dan Publishable Key dari project Supabase.
+5. Buka index.html.
+6. Cari:
+   const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL_HERE";
+   const SUPABASE_PUBLISHABLE_KEY = "PASTE_SUPABASE_PUBLISHABLE_KEY_HERE";
+7. Ganti kedua nilai tersebut dengan milik project kamu.
+8. Upload index.html + logo.png ke hosting website kamu.
+
+PENTING:
+- Gunakan Publishable/anon key untuk browser, bukan service_role key.
+- RLS sudah dipakai agar akses database dibatasi oleh policy.
+- Setelah online, ulasan tersimpan di database sehingga pengunjung lain dapat melihatnya.
+- Realtime membuat daftar ulasan bisa diperbarui saat ada ulasan baru.
+
+Dokumentasi resmi Supabase:
+https://supabase.com/docs/reference/javascript/installing
+https://supabase.com/docs/guides/database/postgres/row-level-security
