@@ -484,6 +484,134 @@ section,.cta,.review-section,.reviews-section{
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* V10: remove Mobile Legends character artwork */
+.character-showcase,
+.modal-character,
+.character,
+.character-stage,
+.character-floor { display:none !important; }
+
+/* V10 order form */
+.rizzz-order-wrap{
+  max-width:1120px;margin:0 auto;
+  padding:34px 24px 40px;border:1px solid rgba(92,194,255,.18);
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(8,24,44,.96),rgba(3,12,25,.98));
+  box-shadow:0 25px 80px rgba(0,0,0,.32),inset 0 0 60px rgba(39,172,255,.04);
+}
+.rizzz-order-head{text-align:center;margin-bottom:26px}
+.rizzz-order-head .eyebrow{color:#43bfff;letter-spacing:.18em;font-weight:800;font-size:.78rem}
+.rizzz-order-head h2{margin:8px 0;font-size:clamp(1.7rem,4vw,2.5rem)}
+.rizzz-order-head p{margin:0 auto;max-width:700px;color:#9eb4ca;line-height:1.7}
+.rizzz-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rizzz-field{display:flex;flex-direction:column;gap:8px}
+.rizzz-field.full{grid-column:1/-1}
+.rizzz-field label{font-weight:700;color:#dceaf7;font-size:.92rem}
+.rizzz-field input,.rizzz-field select,.rizzz-field textarea{
+  width:100%;box-sizing:border-box;border:1px solid rgba(112,190,240,.14);
+  border-radius:14px;padding:14px 15px;background:rgba(12,30,52,.88);
+  color:#eef8ff;outline:none;font:inherit;transition:.25s ease;
+}
+.rizzz-field textarea{min-height:105px;resize:vertical}
+.rizzz-field input:focus,.rizzz-field select:focus,.rizzz-field textarea:focus{
+  border-color:rgba(53,185,255,.7);box-shadow:0 0 0 4px rgba(53,185,255,.08);
+}
+.rizzz-submit{width:100%;margin-top:22px;cursor:pointer;border:0}
+.rizzz-note{text-align:center;color:#7f9bb4;font-size:.78rem;margin-top:12px}
+@media(max-width:650px){.rizzz-form-grid{grid-template-columns:1fr}.rizzz-field.full{grid-column:auto}.rizzz-order-wrap{padding:25px 16px}}
+
+
+/* ===== V11 PREMIUM OBJECTS + ORDER SECTION ===== */
+.order-section{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.order-section::before{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  right:-110px;top:-90px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(44,177,255,.16),transparent 68%);
+  filter:blur(4px);
+  animation:orderOrb 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.order-section::after{
+  content:"";
+  position:absolute;
+  width:220px;height:2px;
+  left:-30px;bottom:28px;
+  background:linear-gradient(90deg,transparent,rgba(73,196,255,.8),transparent);
+  box-shadow:0 0 16px rgba(73,196,255,.45);
+  animation:orderLine 5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes orderOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,18px) scale(1.12)}}
+@keyframes orderLine{0%,100%{transform:translateX(0);opacity:.25}50%{transform:translateX(260px);opacity:1}}
+
+.order-section .order-card,
+.order-section form{
+  position:relative;
+  z-index:2;
+}
+.order-section input,
+.order-section textarea,
+.order-section select{
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.order-section input:focus,
+.order-section textarea:focus,
+.order-section select:focus{
+  transform:translateY(-2px);
+  box-shadow:0 0 0 1px rgba(67,190,255,.35),0 8px 25px rgba(0,100,190,.18);
+}
+.order-section .order-submit,
+.order-section button[type="submit"]{
+  position:relative;
+  overflow:hidden;
+}
+.order-section .order-submit::before,
+.order-section button[type="submit"]::before{
+  content:"";
+  position:absolute;
+  top:0;left:-120%;width:70%;height:100%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  animation:buttonShine 4.5s ease-in-out infinite;
+}
+@keyframes buttonShine{0%,55%{left:-120%}75%,100%{left:150%}}
+
+.premium-orb{
+  position:absolute;
+  border:1px solid rgba(78,198,255,.22);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:1;
+  animation:orbFloat 7s ease-in-out infinite;
+}
+.premium-orb.one{width:72px;height:72px;right:6%;bottom:12%}
+.premium-orb.two{width:34px;height:34px;left:4%;top:18%;animation-delay:-2.5s}
+@keyframes orbFloat{
+  0%,100%{transform:translateY(0) rotate(0);opacity:.35}
+  50%{transform:translateY(-16px) rotate(180deg);opacity:.8}
+}
+
+.premium-spark{
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  background:#8de4ff;box-shadow:0 0 12px #45caff;
+  animation:sparkPulse 2.8s ease-in-out infinite;
+  z-index:2;pointer-events:none;
+}
+@keyframes sparkPulse{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1.4)}}
+
+@media(max-width:600px){
+  .order-section::after{width:130px}
+  .premium-orb.one{right:-10px}
+}
+
 </style>
 </head>
 
@@ -504,7 +632,7 @@ section,.cta,.review-section,.reviews-section{
   <a class="whatsapp-float" href="https://wa.me/6282289148143?text=Halo%20RizzzStore.id%2C%20saya%20mau%20order." target="_blank" rel="noopener" aria-label="Order via WhatsApp">💬</a>
 
   <main>
-    <section class="ref-hero" id="home">
+    <section class="ref-hero order-section" id="home">
       <div class="ref-hero-inner reveal">
         <div class="ref-kicker"><span class="dot"></span> RIZZZSTORE.ID • MOBILE LEGEND SERVICE</div>
         <div class="ref-logo-mark" aria-label="RZ"><span>RZ</span></div>
@@ -553,51 +681,96 @@ section,.cta,.review-section,.reviews-section{
 
 
 
-    <!-- ONLY NEW SECTION: ONLINE RATING / ULASAN -->
-    <section class="container reveal" id="ulasan">
-      <div class="section-head">
-        <div class="eyebrow">Customer Review</div>
-        <h2>Rating & Ulasan</h2>
-        <p>Kasih rating dan ceritakan pengalaman kamu di RizzzStore.id ⭐</p>
-      </div>
-      <div class="cards">
-        <div class="card">
-          <div class="card-title"><h3>Beri Ulasan</h3><span class="flag">⭐ REVIEW</span></div>
-          <form id="reviewForm" class="review-form">
-            <input id="reviewName" class="review-input" required maxlength="30" placeholder="Nama / Nickname">
-            <div class="stars" id="starPicker" aria-label="Pilih rating">
-              <button class="star-btn" type="button" data-star="1">★</button>
-              <button class="star-btn" type="button" data-star="2">★</button>
-              <button class="star-btn" type="button" data-star="3">★</button>
-              <button class="star-btn" type="button" data-star="4">★</button>
-              <button class="star-btn" type="button" data-star="5">★</button>
-            </div>
-            <textarea id="reviewText" class="review-textarea" required maxlength="180" placeholder="Tulis ulasan kamu..."></textarea>
-            <div id="reviewStatus" class="review-status"></div>
-            <button class="btn primary" type="submit">KIRIM ULASAN</button>
-          </form>
-        </div>
-        <div class="card">
-          <div class="card-title"><h3>Ulasan Terbaru</h3><span class="flag" id="averageRating">⭐ 0.0</span></div>
-          <div id="reviewList" class="price-list"><div class="review-empty">Memuat ulasan...</div></div>
-        </div>
-      </div>
-    </section>
-
     <section class="container reveal" id="order">
-      <div class="ref-end">
-        <div class="mini-mark"><span>RZ</span></div>
-        <div class="eyebrow">RIZZZSTORE.ID</div>
-        <h2>SIAP NAIKIN RANK KAMU?</h2>
-        <p>Pilih layanan, buka pricelist yang kamu butuhkan, lalu langsung hubungi admin. Desainnya mengambil nuansa landing page referensi kamu, tetapi tetap memakai identitas biru premium RizzzStore.id.</p>
-        <a class="btn primary" href="https://wa.me/6282289148143?text=Halo%20RizzzStore.id%2C%20saya%20mau%20order%20joki%20Mobile%20Legend.%20Mohon%20info%20lebih%20lanjut." target="_blank" rel="noopener">ORDER VIA WHATSAPP</a>
-        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:18px;">
-          <a class="btn secondary" href="https://wa.me/6282289148143" target="_blank" rel="noopener">💬 WhatsApp</a>
-          <a class="btn secondary" href="https://www.tiktok.com/@rizzzstore.joki" target="_blank" rel="noopener">🎵 TikTok</a>
-          <a class="btn secondary" href="https://www.instagram.com/rizzzjoki.id/" target="_blank" rel="noopener">📸 Instagram</a>
+  <div class="rizzz-order-wrap">
+    <div class="rizzz-order-head">
+      <div class="eyebrow">RIZZZSTORE.ID</div>
+      <h2>MASUKKAN DATA PESANAN</h2>
+      <p>Isi data singkat di bawah. Setelah menekan tombol, detail pesanan akan langsung dibuka di WhatsApp admin.</p>
+    </div>
+
+    <form id="rizzzOrderForm">
+      <div class="rizzz-form-grid">
+        <div class="rizzz-field">
+          <label for="orderService">Layanan</label>
+          <select id="orderService" required>
+            <option value="">Pilih layanan</option>
+            <option>Joki Mobile Legend</option>
+            <option>Joki Gendong</option>
+            <option>Joki Montage</option>
+            <option>Joki Classic / CLWR</option>
+          </select>
+        </div>
+
+        <div class="rizzz-field">
+          <label for="orderName">Nama / Nick</label>
+          <input id="orderName" type="text" placeholder="Masukkan nama atau nickname" required>
+        </div>
+
+        <div class="rizzz-field">
+          <label for="orderId">User ID / ID Game</label>
+          <input id="orderId" type="text" placeholder="Masukkan User ID / ID game">
+        </div>
+
+        <div class="rizzz-field">
+          <label for="orderRank">Rank / Paket</label>
+          <input id="orderRank" type="text" placeholder="Contoh: Epic → Mythic / 10x Win">
+        </div>
+
+        <div class="rizzz-field full">
+          <label for="orderNote">Catatan Pesanan</label>
+          <textarea id="orderNote" placeholder="Tulis detail pesanan atau request kamu di sini..."></textarea>
         </div>
       </div>
-    </section>
+
+      <button class="btn primary rizzz-submit" type="submit">💬 LANJUT ORDER VIA WHATSAPP</button>
+      <div class="rizzz-note">WhatsApp akan terbuka otomatis dengan detail pesanan yang kamu isi.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ONLY NEW SECTION: ONLINE RATING / ULASAN -->
+<section class="container reveal" id="ulasan">
+  <div class="section-head">
+    <div class="eyebrow">Customer Review</div>
+    <h2>Rating & Ulasan</h2>
+    <p>Kasih rating dan ceritakan pengalaman kamu di RizzzStore.id ⭐</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">
+        <h3>Beri Ulasan</h3>
+        <span class="flag">⭐ REVIEW</span>
+      </div>
+      <form id="reviewForm" class="review-form">
+        <input id="reviewName" class="review-input" required maxlength="30" placeholder="Nama / Nickname">
+        <div class="stars" id="starPicker" aria-label="Pilih rating">
+          <button class="star-btn" type="button" data-star="1">★</button>
+          <button class="star-btn" type="button" data-star="2">★</button>
+          <button class="star-btn" type="button" data-star="3">★</button>
+          <button class="star-btn" type="button" data-star="4">★</button>
+          <button class="star-btn" type="button" data-star="5">★</button>
+        </div>
+        <textarea id="reviewText" class="review-textarea" required maxlength="180" placeholder="Tulis ulasan kamu..."></textarea>
+        <div id="reviewStatus" class="review-status"></div>
+        <button class="btn primary" type="submit">KIRIM ULASAN</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <h3>Ulasan Terbaru</h3>
+        <span class="flag" id="averageRating">⭐ 0.0</span>
+      </div>
+      <div id="reviewList" class="price-list">
+        <div class="review-empty">Memuat ulasan...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   </main>
 
 
@@ -948,6 +1121,35 @@ section,.cta,.review-section,.reviews-section{
       });
     }
   }
+})();
+</script>
+
+
+<script>
+(function(){
+  const form=document.getElementById('rizzzOrderForm');
+  if(!form) return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const service=document.getElementById('orderService').value;
+    const name=document.getElementById('orderName').value.trim();
+    const id=document.getElementById('orderId').value.trim();
+    const rank=document.getElementById('orderRank').value.trim();
+    const note=document.getElementById('orderNote').value.trim();
+
+    const lines=[
+      'Halo RizzzStore.id, saya mau order.',
+      '',
+      'Layanan: '+service,
+      'Nama/Nick: '+name,
+      id ? 'User ID / ID Game: '+id : '',
+      rank ? 'Rank / Paket: '+rank : '',
+      note ? 'Catatan: '+note : ''
+    ].filter(Boolean);
+
+    const url='https://wa.me/6282289148143?text='+encodeURIComponent(lines.join('\n'));
+    window.open(url,'_blank','noopener');
+  });
 })();
 </script>
 
