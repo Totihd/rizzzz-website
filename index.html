@@ -645,18 +645,55 @@
     }
 
     async function loadReviews() {
-      const { data, error } = await supabaseClient
-        .from("reviews")
-        .select("id,name,rating,text,created_at")
-        .order("created_at", { ascending: false })
-        .limit(30);
+      let data = null;
+      let error = null;
+
+      try {
+        const result = await supabaseClient
+          .from("reviews")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(30);
+        data = result.data;
+        error = result.error;
+      } catch (err) {
+        error = err;
+      }
+
+      // Fallback langsung ke REST Supabase jika client query gagal.
+      if (error || !Array.isArray(data)) {
+        try {
+          const response = await fetch(
+            SUPABASE_URL + "/rest/v1/reviews?select=*&order=created_at.desc&limit=30",
+            {
+              headers: {
+                "apikey": SUPABASE_PUBLISHABLE_KEY,
+                "Authorization": "Bearer " + SUPABASE_PUBLISHABLE_KEY
+              },
+              cache: "no-store"
+            }
+          );
+
+          if (response.ok) {
+            data = await response.json();
+            error = null;
+          } else {
+            error = new Error("Supabase REST HTTP " + response.status);
+          }
+        } catch (err) {
+          error = err;
+        }
+      }
 
       if (error) {
-        reviewList.innerHTML = '<div class="review-empty">Ulasan belum dapat dimuat. Pastikan database Supabase sudah disetup.</div>';
-        console.error(error);
+        reviewList.innerHTML =
+          '<div class="review-empty">Ulasan belum dapat dimuat.<br>' +
+          '<small style="opacity:.75">Koneksi Supabase / tabel reviews perlu dicek.</small></div>';
+        console.error("RizzzStore review error:", error);
         return;
       }
-      renderReviews(data || []);
+
+      renderReviews(Array.isArray(data) ? data : []);
     }
 
     starButtons.forEach(btn => {
