@@ -612,6 +612,83 @@ section,.cta,.review-section,.reviews-section{
   .premium-orb.one{right:-10px}
 }
 
+
+/* V17 Gaming Tools + bottom navigation */
+body { padding-bottom: 88px; }
+#gamingToolsPage { display:none; min-height:75vh; padding:30px 0 35px; }
+#gamingToolsPage.active { display:block; }
+.tools-heading { text-align:center; margin:10px auto 28px; max-width:720px; }
+.tools-heading h2 { font-size:clamp(2rem,6vw,3.2rem); margin:0 0 10px; letter-spacing:-1.5px; }
+.tools-heading h2 span { color:#48baff; }
+.tools-heading p { color:var(--muted); line-height:1.7; margin:0; }
+.tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.tool-card { text-align:left; width:100%; padding:24px; border:1px solid var(--line); border-radius:22px; background:linear-gradient(145deg,rgba(16,34,60,.94),rgba(7,15,29,.94)); color:var(--white); cursor:pointer; transition:.22s; min-height:205px; }
+.tool-card:hover { transform:translateY(-3px); border-color:rgba(72,186,255,.6); box-shadow:var(--shadow); }
+.tool-icon { display:grid;place-items:center;width:54px;height:54px;border-radius:17px;background:rgba(53,184,255,.12);font-size:1.65rem;margin-bottom:18px; }
+.tool-tag { display:inline-block;border-radius:999px;background:rgba(53,184,255,.12);color:#bfeaff;font-size:.75rem;font-weight:800;padding:5px 10px;margin-bottom:12px; }
+.tool-card h3 { margin:0 0 10px;font-size:1.2rem; }
+.tool-card p { color:var(--muted);font-size:.94rem;line-height:1.65;margin:0 0 16px; }
+.tool-use { color:#58bdff;font-weight:800; }
+.tool-screen { display:none; max-width:720px; margin:0 auto; }
+.tool-screen.active { display:block; }
+.tool-back { border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--white);padding:10px 14px;border-radius:12px;cursor:pointer;margin-bottom:20px; }
+.calc-panel { padding:clamp(20px,4vw,30px);border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(15,31,54,.95),rgba(5,12,24,.96)); }
+.calc-panel h3 { margin:0 0 8px;font-size:1.5rem; }
+.calc-panel .calc-desc { color:var(--muted);line-height:1.65;margin:0 0 22px; }
+.calc-fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px; }
+.calc-field { display:flex;flex-direction:column;gap:7px; }
+.calc-field.full { grid-column:1/-1; }
+.calc-field label { font-weight:750;font-size:.9rem;color:#d9edff; }
+.calc-field input,.calc-field select { width:100%;padding:13px 14px;border:1px solid rgba(92,194,255,.25);border-radius:12px;background:#071426;color:white;font:inherit;outline:none; }
+.calc-field input:focus,.calc-field select:focus { border-color:#35b8ff;box-shadow:0 0 0 3px rgba(53,184,255,.1); }
+.calc-result { margin-top:18px;padding:18px;border:1px solid rgba(53,184,255,.25);border-radius:16px;background:rgba(53,184,255,.08); }
+.calc-result .result-label { color:var(--muted);font-size:.88rem; }
+.calc-result strong { display:block;font-size:clamp(1.7rem,5vw,2.4rem);color:#71ceff;margin:4px 0;overflow-wrap:anywhere; }
+.calc-result p { margin:6px 0 0;color:#b9ccdc;line-height:1.6;font-size:.9rem; }
+.calc-actions { display:flex;flex-wrap:wrap;gap:10px;margin-top:16px; }
+.calc-note { margin-top:15px;color:var(--muted);font-size:.82rem;line-height:1.6; }
+.bottom-app-nav { position:fixed;left:0;right:0;bottom:0;z-index:120;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:9px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));background:rgba(4,10,19,.94);backdrop-filter:blur(18px);border-top:1px solid rgba(92,194,255,.18); }
+.bottom-app-nav button { border:0;background:transparent;color:#91a5ba;padding:7px 3px 5px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:inherit;font-size:.72rem;cursor:pointer; }
+.bottom-app-nav button .nav-emoji { font-size:1.2rem;line-height:1.2; }
+.bottom-app-nav button.active { color:#5fc3ff;background:rgba(53,184,255,.08);font-weight:850; }
+#simpleAppPage { display:none;min-height:70vh;padding:32px 0; }
+#simpleAppPage.active { display:block; }
+.simple-page-card { max-width:700px;margin:auto;padding:26px;border:1px solid var(--line);border-radius:22px;background:rgba(12,27,49,.8); }
+@media(max-width:640px){ .tools-grid{grid-template-columns:1fr;gap:13px}.tool-card{min-height:unset;padding:20px}.calc-fields{grid-template-columns:1fr}.calc-field.full{grid-column:auto} #gamingToolsPage{padding-top:22px} }
+
+
+/* Help / FAQ page */
+#simplePageContent.help-page{padding:0;background:transparent;border:0;box-shadow:none}
+.help-intro{text-align:center;padding:18px 4px 24px}
+.help-intro h2{font-size:clamp(27px,5vw,36px);margin:10px 0}
+.help-intro p{color:var(--muted);line-height:1.65;margin:0 auto;max-width:620px}
+.help-search{display:flex;align-items:center;gap:12px;background:#242426;border:1px solid var(--line);border-radius:20px;padding:0 18px;margin:0 0 22px}
+.help-search span{font-size:23px;color:var(--muted)}
+.help-search input{width:100%;background:transparent;border:0;outline:0;color:var(--text);padding:18px 0;font:inherit}
+.help-categories{display:grid;gap:10px;margin-bottom:28px}
+.help-category{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:15px 18px;border-radius:17px;background:var(--card);border:1px solid var(--line);color:var(--text);font:inherit;font-weight:650;cursor:pointer}
+.help-category .cat-icon{width:24px;text-align:center;font-size:20px}
+.help-category .cat-count{margin-left:auto;font-size:13px;font-weight:600;color:var(--muted)}
+.help-category.active{background:#397ff0;border-color:#397ff0;color:#fff}
+.help-category.active .cat-count{color:#fff;background:#ffffff30;border-radius:20px;padding:5px 10px}
+.help-faq-card{padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--card);margin-bottom:22px}
+.help-faq-title{display:flex;align-items:center;gap:12px;font-weight:750;margin-bottom:18px}
+.help-faq-title .cat-icon{font-size:22px;color:var(--accent)}
+.help-faq-item{border-bottom:1px solid var(--line)}
+.help-faq-item:last-child{border-bottom:0}
+.help-faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;text-align:left;background:transparent;border:0;color:var(--text);font:inherit;font-weight:650;padding:19px 0;cursor:pointer}
+.help-faq-q .chevron{color:var(--muted);font-size:22px;transition:transform .2s}
+.help-faq-item.open .chevron{transform:rotate(180deg)}
+.help-faq-a{display:none;color:var(--muted);line-height:1.75;padding:0 0 19px}
+.help-faq-item.open .help-faq-a{display:block}
+.help-no-results{color:var(--muted);text-align:center;padding:24px}
+.help-contact{margin-top:42px;padding:28px 20px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:22px}
+.help-contact-icon{display:grid;place-items:center;width:78px;height:78px;margin:0 auto 20px;border-radius:50%;background:rgba(59,130,246,.14);font-size:34px;color:var(--accent)}
+.help-contact p{color:var(--muted);line-height:1.7}
+.help-contact .btn{display:inline-flex;margin-top:12px}
+@media(max-width:520px){.help-faq-card{padding:19px}.help-category{padding:14px 15px}.help-contact{padding:25px 16px}}
+
+  .calc-action{display:block;width:100%;border:0;border-radius:12px;padding:14px 18px;margin-top:16px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font:inherit;font-weight:700;cursor:pointer}.calc-result[hidden]{display:none!important}
 </style>
 </head>
 
@@ -871,6 +948,31 @@ section,.cta,.review-section,.reviews-section{
   </div>
 
   <footer>© <span id="year"></span> RIZZZSTORE.ID — Mobile Legend Service.</footer>
+
+
+
+  <section id="gamingToolsPage" aria-label="Kalkulator Gaming">
+    <div class="container">
+      <div class="tools-heading"><div class="badge"><span class="dot"></span> RIZZZSTORE.ID • GAMING TOOLS</div><h2>Kalkulator <span>Gaming</span></h2><p>Kumpulan kalkulator praktis untuk menghitung statistik game dan anggaran. Gratis dan mudah digunakan.</p></div>
+      <div id="toolsCatalog" class="tools-grid">
+        <button class="tool-card" data-tool="winrate"><span class="tool-icon">🎯</span><span class="tool-tag">MOBILE LEGENDS</span><h3>Kalkulator Winrate</h3><p>Hitung persentase kemenangan dan perkiraan match untuk mencapai target WR.</p><span class="tool-use">Gunakan ›</span></button>
+        <button class="tool-card" data-tool="magic"><span class="tool-icon">✨</span><span class="tool-tag">HITUNG ANGGARAN</span><h3>Kalkulator Magic Wheel</h3><p>Estimasi biaya berdasarkan progres, harga spin, dan anggaran yang kamu masukkan.</p><span class="tool-use">Gunakan ›</span></button>
+        <button class="tool-card" data-tool="zodiac"><span class="tool-icon">⭐</span><span class="tool-tag">HITUNG ANGGARAN</span><h3>Kalkulator Spin Zodiac</h3><p>Hitung estimasi biaya berdasarkan Star Power, harga spin, dan target progres.</p><span class="tool-use">Gunakan ›</span></button>
+        <button class="tool-card" data-tool="price"><span class="tool-icon">🧮</span><span class="tool-tag">KALKULATOR UMUM</span><h3>Kalkulator Harga</h3><p>Hitung total belanja, diskon, dan konversi harga sederhana.</p><span class="tool-use">Gunakan ›</span></button>
+      </div>
+      <div class="tool-screen" id="screen-winrate"><button class="tool-back" data-back>← Semua kalkulator</button><div class="calc-panel"><h3>🎯 Kalkulator Win Rate</h3><p class="calc-desc">Hitung jumlah kemenangan beruntun yang dibutuhkan untuk mencapai target win rate.</p><div class="calc-fields"><div class="calc-field full"><label for="wrMatches">Total Pertandingan Kamu Saat Ini</label><input id="wrMatches" type="number" min="1" step="1" placeholder="Contoh: 223" inputmode="numeric"></div><div class="calc-field full"><label for="wrCurrent">Total Win Rate Kamu Saat Ini (%)</label><input id="wrCurrent" type="number" min="0" max="100" step="0.01" placeholder="Contoh: 54" inputmode="decimal"></div><div class="calc-field full"><label for="wrTarget">Win Rate Total yang Kamu Inginkan (%)</label><input id="wrTarget" type="number" min="0.01" max="100" step="0.01" placeholder="Contoh: 70" inputmode="decimal"></div></div><button type="button" class="calc-action" id="wrCalculate">Hitung</button><div class="calc-result" id="wrResultBox" hidden><span class="result-label">Hasil Perhitungan</span><strong id="wrNow">—</strong><p id="wrExplain">Masukkan data lalu tekan Hitung.</p></div><p class="calc-note">Perhitungan menganggap semua pertandingan berikutnya menang beruntun. Karena WR game bisa dibulatkan, hasilnya merupakan estimasi.</p></div></div>
+      <div class="tool-screen" id="screen-magic"><button class="tool-back" data-back>← Semua kalkulator</button><div class="calc-panel"><h3>✨ Kalkulator Magic Wheel</h3><p class="calc-desc">Hitung perkiraan diamond dari progres yang kamu masukkan. Harga bisa berubah mengikuti pembaruan game.</p><div class="calc-fields"><div class="calc-field"><label for="mwProgress">Progres saat ini (poin)</label><input id="mwProgress" type="number" min="0" max="199" value="0" inputmode="numeric"></div><div class="calc-field"><label for="mwTarget">Target progres</label><input id="mwTarget" type="number" min="1" value="200" inputmode="numeric"></div><div class="calc-field"><label for="mwSingle">Harga 1x spin (diamond)</label><input id="mwSingle" type="number" min="0" value="60" inputmode="numeric"></div><div class="calc-field"><label for="mwFive">Harga paket 5x (diamond)</label><input id="mwFive" type="number" min="0" value="270" inputmode="numeric"></div><div class="calc-field full"><label for="mwFree">Spin gratis/token yang tersedia</label><input id="mwFree" type="number" min="0" value="0" inputmode="numeric"></div></div><div class="calc-result"><span class="result-label">Estimasi kebutuhan diamond</span><strong id="mwResult">10.800 💎</strong><p id="mwExplain">Estimasi berdasarkan input kamu, bukan jaminan hasil.</p></div><p class="calc-note">Ini hanya alat hitung anggaran. Periksa harga dan aturan yang tampil di dalam game sebelum mengambil keputusan; tidak ada hasil spin yang dijamin selain aturan resmi yang berlaku.</p></div></div>
+      <div class="tool-screen" id="screen-zodiac"><button class="tool-back" data-back>← Semua kalkulator</button><div class="calc-panel"><h3>⭐ Kalkulator Spin Zodiac</h3><p class="calc-desc">Masukkan Star Power saat ini dan target yang terlihat di game. Harga dapat berbeda menurut diskon atau event.</p><div class="calc-fields"><div class="calc-field"><label for="zProgress">Star Power saat ini</label><input id="zProgress" type="number" min="0" max="99" value="0" inputmode="numeric"></div><div class="calc-field"><label for="zTarget">Target Star Power</label><input id="zTarget" type="number" min="1" value="100" inputmode="numeric"></div><div class="calc-field"><label for="zSingle">Harga 1x spin (diamond)</label><input id="zSingle" type="number" min="0" value="20" inputmode="numeric"></div><div class="calc-field"><label for="zFive">Harga paket 5x (diamond)</label><input id="zFive" type="number" min="0" value="100" inputmode="numeric"></div><div class="calc-field"><label for="zFree">Spin gratis/token yang tersedia</label><input id="zFree" type="number" min="0" value="0" inputmode="numeric"></div><div class="calc-field"><label for="zAverage">Perkiraan Star Power per spin</label><input id="zAverage" type="number" min="1" max="5" step="0.1" value="3" inputmode="decimal"></div></div><div class="calc-result"><span class="result-label">Estimasi biaya berdasarkan target spin</span><strong id="zResult">0 💎</strong><p id="zExplain">Perkiraan berdasarkan jumlah spin yang kamu masukkan.</p></div><p class="calc-note">Star Power yang didapat per spin dapat bervariasi, jadi biaya nyata bisa lebih tinggi atau lebih rendah. Gunakan ini sebagai perkiraan anggaran saja.</p></div></div>
+      <div class="tool-screen" id="screen-price"><button class="tool-back" data-back>← Semua kalkulator</button><div class="calc-panel"><h3>🧮 Kalkulator Harga</h3><p class="calc-desc">Hitung total harga setelah diskon atau konversi nilai sederhana.</p><div class="calc-fields"><div class="calc-field"><label for="priceUnit">Harga satuan (Rp)</label><input id="priceUnit" type="number" min="0" value="10000" inputmode="numeric"></div><div class="calc-field"><label for="priceQty">Jumlah</label><input id="priceQty" type="number" min="0" value="1" inputmode="numeric"></div><div class="calc-field"><label for="priceDiscount">Diskon (%)</label><input id="priceDiscount" type="number" min="0" max="100" value="0" inputmode="decimal"></div><div class="calc-field"><label for="priceRm">Kurs 1 RM ke Rp (opsional)</label><input id="priceRm" type="number" min="0" value="3500" inputmode="numeric"></div><div class="calc-field full"><label for="priceConvert">Nilai dalam RM yang ingin dikonversi (opsional)</label><input id="priceConvert" type="number" min="0" value="0" inputmode="decimal"></div></div><div class="calc-result"><span class="result-label">Total setelah diskon</span><strong id="priceResult">Rp10.000</strong><p id="priceExplain">Diskon Rp0 · Total sebelum diskon Rp10.000</p><p id="priceConversion">Konversi RM: Rp0</p></div></div></div>
+    </div>
+  </section>
+  <section id="simpleAppPage"><div class="container"><div class="simple-page-card" id="simplePageContent"></div></div></section>
+  <nav class="bottom-app-nav" aria-label="Navigasi utama">
+    <button class="active" data-page="home"><span class="nav-emoji">⌂</span><span>Beranda</span></button>
+    <button data-page="calculator"><span class="nav-emoji">◎</span><span>Kalkulator</span></button>
+    <button data-page="transactions"><span class="nav-emoji">▤</span><span>Cek Transaksi</span></button>
+    <button data-page="help"><span class="nav-emoji">ⓘ</span><span>Bantuan</span></button>
+  </nav>
 
   <!-- Supabase browser client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1150,6 +1252,90 @@ section,.cta,.review-section,.reviews-section{
     const url='https://wa.me/6282289148143?text='+encodeURIComponent(lines.join('\n'));
     window.open(url,'_blank','noopener');
   });
+})();
+</script>
+
+
+<script>
+(function(){
+ const main=document.querySelector('main'), footer=document.querySelector('footer');
+ const tools=document.getElementById('gamingToolsPage'), simple=document.getElementById('simpleAppPage');
+ const nav=[...document.querySelectorAll('.bottom-app-nav button')];
+ const catalog=document.getElementById('toolsCatalog');
+ const screens=[...document.querySelectorAll('.tool-screen')];
+
+ const helpGroups=[
+  {name:'Umum',icon:'ⓘ',items:[
+   ['Apa itu RIZZZSTORE.ID?','RIZZZSTORE.ID menyediakan informasi layanan dan bantuan seputar kebutuhan gaming. Silakan lihat daftar layanan dan pricelist di halaman Beranda sebelum melakukan pemesanan.'],
+   ['Bagaimana cara menghubungi customer service?','Tekan tombol Kirim Pesan di bagian bawah halaman Bantuan untuk menghubungi admin melalui WhatsApp. Kamu juga bisa mengunjungi Instagram @rizzzjoki.id atau TikTok @rizzzstore.joki.'],
+   ['Apakah ada biaya tambahan untuk transaksi?','Harga mengikuti pricelist yang ditampilkan. Jika ada biaya atau ketentuan khusus, konfirmasikan terlebih dahulu kepada admin sebelum menyetujui pesanan.']
+  ]},
+  {name:'Top Up',icon:'🎮',items:[
+   ['Bagaimana cara memesan layanan?','Pilih layanan di halaman Beranda, baca pricelist, lalu isi formulir pesanan dengan data yang diminta. Periksa kembali detailnya sebelum melanjutkan ke WhatsApp.'],
+   ['Bagaimana cara memilih layanan yang tepat?','Buka kartu layanan yang sesuai, lalu tekan tombol pricelist untuk melihat pilihan paket dan harganya. Jika masih bingung, tanyakan kepada admin.'],
+   ['Berapa lama proses pesanan?','Waktu pengerjaan dapat berbeda sesuai jenis layanan dan antrean. Tanyakan estimasi terbaru kepada admin sebelum memesan.'],
+   ['Apakah saya bisa menulis request hero?','Bisa. Isi kolom Req Hero / Request Hero pada formulir pesanan dengan hero yang kamu inginkan.']
+  ]},
+  {name:'Pembayaran',icon:'▣',items:[
+   ['Bagaimana cara melanjutkan pemesanan?','Setelah mengisi formulir, tekan Lanjut Order via WhatsApp. Pesan berisi detail pesanan akan disiapkan agar bisa dikonfirmasi dengan admin.'],
+   ['Metode pembayaran apa yang tersedia?','Konfirmasikan metode pembayaran yang sedang tersedia langsung kepada admin melalui WhatsApp sebelum membayar.'],
+   ['Kapan saya harus membayar?','Tunggu konfirmasi detail pesanan dan instruksi pembayaran dari admin. Jangan mengirim pembayaran sebelum rincian pesanan jelas.'],
+   ['Apa yang harus saya lakukan setelah membayar?','Simpan bukti pembayaran dan kirimkan kepada admin sesuai instruksi, lalu tunggu konfirmasi.']
+  ]},
+  {name:'Pengembalian Dana',icon:'▣',items:[
+   ['Apakah pembayaran bisa dikembalikan?','Ketentuan pengembalian bergantung pada status dan kondisi pesanan. Hubungi admin dengan nomor atau detail pesanan untuk meminta pemeriksaan.'],
+   ['Bagaimana cara mengajukan pengembalian dana?','Hubungi admin melalui WhatsApp, jelaskan kendala, dan sertakan detail pesanan serta bukti pembayaran jika ada.']
+  ]},
+  {name:'Keamanan',icon:'⬡',items:[
+   ['Apakah data pesanan saya aman?','Berikan hanya informasi yang diperlukan untuk memproses pesanan. Jangan pernah membagikan kata sandi akun atau kode OTP kepada siapa pun.'],
+   ['Apakah saya perlu memberikan kode OTP?','Tidak. Jangan berikan kode OTP, kata sandi, atau kode pemulihan kepada admin maupun pihak lain.'],
+   ['Bagaimana memastikan detail pesanan benar?','Periksa layanan, paket, nama, request hero, dan catatan sebelum menekan tombol order WhatsApp.'],
+   ['Apa yang harus dilakukan jika menemukan kendala?','Hubungi admin melalui kanal resmi dan jelaskan kendalanya. Jangan mengirimkan kata sandi atau kode keamanan.']
+  ]}
+ ];
+ function renderHelp(content){
+  content.className='simple-page-card help-page';
+  content.innerHTML=`<div class="help-intro"><div class="badge">RIZZZSTORE.ID • PUSAT BANTUAN</div><h2>Pusat <span style="color:var(--accent)">Bantuan</span></h2><p>Temukan jawaban dari pertanyaan yang sering diajukan. Pilih kategori atau cari pertanyaan di bawah ini.</p></div>
+  <label class="help-search"><span>⌕</span><input id="helpSearch" type="search" placeholder="Cari pertanyaan..." aria-label="Cari pertanyaan"></label>
+  <div class="help-categories" id="helpCategories"></div><div id="helpFaqArea"></div>
+  <div class="help-contact"><div class="help-contact-icon">☏</div><h2>Masih butuh bantuan?</h2><p>Tim customer service kami siap membantu Anda.<br>Jangan ragu untuk menghubungi kami!</p><a class="btn primary" href="https://wa.me/6282289148143" target="_blank" rel="noopener">✉ &nbsp; Kirim Pesan</a><p style="margin-top:18px;font-size:14px">Instagram: @rizzzjoki.id · TikTok: @rizzzstore.joki</p></div>`;
+  let active='Umum';
+  const categories=content.querySelector('#helpCategories'),area=content.querySelector('#helpFaqArea'),search=content.querySelector('#helpSearch');
+  function draw(){
+   const query=search.value.trim().toLowerCase();
+   categories.innerHTML=helpGroups.map(g=>`<button class="help-category ${g.name===active?'active':''}" data-cat="${g.name}"><span class="cat-icon">${g.icon}</span><span>${g.name}</span><span class="cat-count">${g.items.length}</span></button>`).join('');
+   let groups=helpGroups.map(g=>({...g,items:g.items.filter(x=>(g.name===active||query)&&(!query||(`${g.name} ${x[0]} ${x[1]}`).toLowerCase().includes(query)))})).filter(g=>g.items.length&&(query||g.name===active));
+   area.innerHTML=groups.length?groups.map(g=>`<div class="help-faq-card"><div class="help-faq-title"><span class="cat-icon">${g.icon}</span><span>${g.name}</span></div>${g.items.map((item,i)=>`<div class="help-faq-item ${!query&&g.name===active&&i===0?'open':''}"><button class="help-faq-q" aria-expanded="${!query&&g.name===active&&i===0?'true':'false'}"><span>${item[0]}</span><span class="chevron">⌄</span></button><div class="help-faq-a">${item[1]}</div></div>`).join('')}</div>`).join(''):'<div class="help-faq-card help-no-results">Pertanyaan tidak ditemukan. Coba kata kunci lain atau hubungi admin.</div>';
+   categories.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.cat;search.value='';draw()}));
+   area.querySelectorAll('.help-faq-q').forEach(b=>b.addEventListener('click',()=>{const item=b.closest('.help-faq-item');item.classList.toggle('open');b.setAttribute('aria-expanded',item.classList.contains('open')?'true':'false')}));
+  }
+  search.addEventListener('input',draw);draw();
+ }
+
+ function showCatalog(){catalog.style.display='grid';screens.forEach(x=>x.classList.remove('active'));}
+ function page(name){nav.forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+   if(name==='home'){main.style.display='';footer.style.display='';tools.classList.remove('active');simple.classList.remove('active');window.scrollTo({top:0,behavior:'smooth'});}
+   else if(name==='calculator'){main.style.display='none';footer.style.display='none';simple.classList.remove('active');tools.classList.add('active');showCatalog();window.scrollTo({top:0,behavior:'smooth'});}
+   else {main.style.display='none';footer.style.display='none';tools.classList.remove('active');simple.classList.add('active');
+     const content=document.getElementById('simplePageContent');
+     if(name==='transactions') content.innerHTML='<div class="badge">RIZZZSTORE.ID</div><h2> Cek Transaksi </h2><p style="color:var(--muted);line-height:1.7">Fitur pengecekan otomatis belum terhubung ke sistem pesanan. Untuk memastikan status order, hubungi admin melalui WhatsApp.</p><a class="btn primary" href="https://wa.me/6282289148143" target="_blank" rel="noopener">Hubungi Admin WhatsApp ↗</a>';
+     else renderHelp(content);
+     window.scrollTo({top:0,behavior:'smooth'});
+   }
+ }
+ nav.forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));
+ catalog.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{catalog.style.display='none';screens.forEach(x=>x.classList.toggle('active',x.id==='screen-'+b.dataset.tool));window.scrollTo({top:0,behavior:'smooth'});}));
+ document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{showCatalog();window.scrollTo({top:0,behavior:'smooth'});}));
+ const n=id=>Math.max(0,Number(document.getElementById(id).value)||0);
+ const money=v=>'Rp'+Math.round(v).toLocaleString('id-ID');
+ function calcWR(){const m=Number(document.getElementById('wrMatches').value),now=Number(document.getElementById('wrCurrent').value),t=Number(document.getElementById('wrTarget').value);const box=document.getElementById('wrResultBox'),out=document.getElementById('wrNow'),ex=document.getElementById('wrExplain');if(!Number.isFinite(m)||!Number.isFinite(now)||!Number.isFinite(t)||m<1||now<0||now>100||t<=0||t>100){box.hidden=true;return;}box.hidden=false;out.textContent=now.toFixed(2)+'%';if(t<=now){ex.textContent='Target sudah tercapai. Kamu tidak perlu menambah kemenangan untuk mencapai target ini.';return;}if(t>=100){ex.textContent='Target 100% tidak dapat dicapai dengan catatan match yang sudah memiliki kekalahan. Target ini memerlukan WR sempurna.';return;}const estimatedWins=m*now/100;const needed=Math.max(0,Math.ceil((t*m/100-estimatedWins)/(1-t/100)-1e-10));const totalAfter=m+needed;const projected=(estimatedWins+needed)/totalAfter*100;ex.textContent='Kamu membutuhkan sekitar '+needed.toLocaleString('id-ID')+' kemenangan beruntun. Total pertandingan menjadi sekitar '+totalAfter.toLocaleString('id-ID')+' match, dengan WR sekitar '+projected.toFixed(2)+'%.';}
+document.getElementById('wrCalculate').addEventListener('click',calcWR);['wrMatches','wrCurrent','wrTarget'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{document.getElementById('wrResultBox').hidden=true;}));
+ function calcSpin(prefix){let prog=n(prefix+'Progress'),target=n(prefix+'Target'),single=n(prefix+'Single'),five=n(prefix+'Five'),free=n(prefix+'Free');let spins;if(prefix==='z'){let avg=Math.max(1,Math.min(5,n('zAverage')||3));spins=Math.max(0,Math.ceil((target-prog)/avg)-free);}else{spins=Math.max(0,target-prog-free);}let fives=Math.floor(spins/5),ones=spins%5;let cost=fives*five+ones*single;let label=prefix==='mw'?'mw':'z';document.getElementById(label+'Result').textContent=Math.round(cost).toLocaleString('id-ID')+' 💎';document.getElementById(label+'Explain').textContent=spins===0?'Berdasarkan input, progres target sudah tercukupi oleh progres dan spin gratis.':'Estimasi '+spins+' spin berbayar: '+fives+' paket 5x + '+ones+' spin 1x. '+(prefix==='z'?'Perkiraan memakai rata-rata Star Power per spin yang kamu masukkan. ':'')+'Hasil aktual dapat berbeda.';}
+ ['mwProgress','mwTarget','mwSingle','mwFive','mwFree'].forEach(id=>document.getElementById(id).addEventListener('input',()=>calcSpin('mw')));
+ ['zProgress','zTarget','zSingle','zFive','zFree','zAverage'].forEach(id=>document.getElementById(id).addEventListener('input',()=>calcSpin('z')));
+ function calcPrice(){let total=n('priceUnit')*n('priceQty'),d=Math.min(100,n('priceDiscount')),disc=total*d/100,final=total-disc,rm=n('priceConvert')*n('priceRm');document.getElementById('priceResult').textContent=money(final);document.getElementById('priceExplain').textContent='Diskon '+money(disc)+' · Total sebelum diskon '+money(total);document.getElementById('priceConversion').textContent='Konversi RM: '+money(rm);}
+ ['priceUnit','priceQty','priceDiscount','priceRm','priceConvert'].forEach(id=>document.getElementById(id).addEventListener('input',calcPrice));
+ calcWR();calcSpin('mw');calcSpin('z');calcPrice();
 })();
 </script>
 
